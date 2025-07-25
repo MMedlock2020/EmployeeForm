@@ -8,7 +8,7 @@ React.Component {
 constructor(props) {
 super(props);
 this.state = {name: '', email: '', title: '',
-department: ''};
+department: '', employees: 0 };
 }
 handleChange = (event) => {
     const { name, value } = event.target;
@@ -17,6 +17,20 @@ handleChange = (event) => {
 
   handleSubmit = (event) => {
     event.preventDefault();
+    const newEmployee = { // newly added code
+      name: this.state.name,
+      email: this.state.email, 
+      title: this.state.title, 
+      department: this.state.department
+    };
+    this.props.onAddEmployee(newEmployee); // Call parent handler
+    this.setState({
+      name: '',
+      email: '',
+      title: '',
+      department: '',
+    });
+// End newly added code
     console.log('Form submitted:', this.state);
     // Optionally reset the form
     this.setState({
