@@ -1,6 +1,8 @@
 'use client'; // New Code
+
 import EmployeeForm from '../Components/EmployeeForm';
 import React, { useState, useEffect } from 'react'; // New Code
+import Link from 'next/link';
 
 export default function HomePage() {
 const [employees, setEmployees] = useState([]); // New Code
@@ -26,7 +28,20 @@ const [employees, setEmployees] = useState([]); // New Code
   return (
     <main>
       <h1>Employee Form</h1>
-      <EmployeeForm onAddEmployee={addEmployee} /> 
+      <EmployeeForm onAddEmployee={addEmployee} />
+
+ <h2>Employee List</h2>
+      {employees.length === 0 ? (
+        <p>No employees found.</p>
+      ) : (
+        <ul>
+          {employees.map((emp) => (
+            <li key={emp.EmployeeId}>
+              {emp.name} – <Link href={`/employees/${emp.EmployeeId}`}>View Details</Link>
+            </li>
+          ))}
+        </ul>
+      )} 
     </main>
   );
 }
